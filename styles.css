@@ -1,0 +1,4734 @@
+:root {
+    --primary-indigo: #6C63FF;
+    --secondary-green: #00BFA6;
+    --accent-gold: #FFB400;
+    --bg-offwhite: #f9f9f6;
+    --text-dark: #2D2D2D;
+    --gradient-1: linear-gradient(135deg, #6C63FF, #00BFA6);
+    --gradient-2: linear-gradient(45deg, #FFB400, #FF6B6B);
+    --nav-height: 80px;
+    --container-padding: 2rem;
+}
+
+@font-face {
+    font-family: 'Clash Display';
+    src: url('path-to-your-font/ClashDisplay-Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--bg-offwhite);
+    overflow-x: hidden;
+}
+
+/* Navigation Styles */
+.glass-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(108, 99, 255, 0.1);
+    padding: 0 var(--container-padding);
+    height: var(--nav-height);
+}
+
+.nav-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.logo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+    transition: all 0.3s ease;
+    text-decoration: none;  /* Remove underline */
+}
+
+.logo-container a {
+    text-decoration: none;  /* Ensure no underline on the anchor tag */
+}
+
+.logo-circle {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(108, 99, 255, 0.2);
+    /* Removed animation: subtleGlow 3s infinite; */
+}
+
+@keyframes subtleGlow {
+    /* Animation kept in case it's used elsewhere, but simplified */
+    0%, 100% {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    }
+}
+
+.logo-circle::before {
+    content: '';
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    background: linear-gradient(
+        45deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 100%
+    );
+    animation: shine 3s infinite;
+}
+
+.logo-circle::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(
+        135deg,
+        var(--primary-indigo),
+        var(--secondary-green)
+    );
+    opacity: 0.1;
+    z-index: -1;
+    /* Removed animation: rotateBorder 4s linear infinite; */
+}
+
+@keyframes rotateBorder {
+    /* Animation removed as it's no longer needed */
+}
+
+.logo-glow {
+    display: none;
+}
+
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px;
+    z-index: 100;
+    cursor: pointer;
+}
+
+.hamburger-menu span {
+    width: 25px;
+    height: 2px;
+    background: var(--text-dark);
+    transition: all 0.3s ease;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link {
+    font-family: 'SF Pro Display', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-1);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--primary-indigo);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link.active {
+    color: var(--primary-indigo);
+    font-weight: 600;
+}
+
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* Hero section with transparent background */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: var(--nav-height) 0 40px;
+    overflow: hidden;
+    background: transparent; /* Removed background color */
+    color: var(--text-dark); /* Reverted to dark text for light background */
+    z-index: 1;
+}
+
+/* Remove the text container box completely */
+.hero-text-container {
+    background-color: transparent;
+    backdrop-filter: none;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    max-width: 600px;
+}
+
+/* Add subtle dot pattern */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(rgba(108, 99, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    z-index: 0;
+}
+
+/* Remove the after pseudo-element */
+.hero::after {
+    content: none;
+}
+
+/* Update text styling for light background */
+.gradient-text {
+    background: linear-gradient(135deg, var(--primary-indigo), var(--secondary-green));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.animated-text {
+    color: var(--text-dark);
+    font-weight: 700;
+}
+
+/* Professional gradient for the ENTIRE subtitle text */
+.subtitle,
+.glitch-wrapper .subtitle,
+.hero-content .subtitle,
+p.subtitle {
+    /* Reset any existing styles that might interfere */
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+    background-image: linear-gradient(90deg, #1a3a5f, #2d5986, #1a3a5f) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    
+    /* Typography settings */
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+    
+    /* Gradient animation */
+    background-size: 200% auto;
+    animation: subtitleGradient 8s ease infinite alternate;
+}
+
+/* Make sure ALL text inside subtitle has the gradient */
+.subtitle *,
+.subtitle span,
+.subtitle span.separator {
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+    background-image: linear-gradient(90deg, #1a3a5f, #2d5986, #1a3a5f) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+}
+
+/* Gradient animation */
+@keyframes subtitleGradient {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+/* Override any text scramble or glitch effects */
+.glitch,
+.glitch-wrapper * {
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+    background-image: linear-gradient(90deg, #1a3a5f, #2d5986, #1a3a5f) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+}
+
+.welcome-text {
+    color: #6C63FF;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    position: relative;
+    display: inline-block;
+}
+
+.welcome-text::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--primary-indigo), var(--secondary-green), var(--accent-gold));
+    background-size: 200% 100%;
+    animation: gradientMove 3s linear infinite;
+}
+
+.hero-description {
+    color: #4a4a4a;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-top: 1.5rem;
+}
+
+/* Highlight text for light background */
+.highlight-text {
+    position: relative;
+    display: inline-block;
+    font-weight: 600;
+    padding: 0 4px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.highlight-text::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    opacity: 0.15;
+    z-index: -1;
+    transition: all 0.3s ease;
+}
+
+.highlight-text:hover::before {
+    opacity: 0.25;
+    transform: scale(1.05);
+}
+
+.highlight-text.indigo {
+    color: var(--primary-indigo);
+}
+
+.highlight-text.indigo::before {
+    background-color: var(--primary-indigo);
+}
+
+.highlight-text.green {
+    color: var(--secondary-green);
+}
+
+.highlight-text.green::before {
+    background-color: var(--secondary-green);
+}
+
+.highlight-text.gold {
+    color: var(--accent-gold);
+}
+
+.highlight-text.gold::before {
+    background-color: var(--accent-gold);
+}
+
+/* Animation keyframes */
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Make hero shapes more visible */
+.hero-shape {
+    opacity: 0.3;
+    z-index: 2;
+}
+
+/* Enhance geometric elements visibility */
+.geometric-elements div {
+    opacity: 0.5;
+    z-index: 3;
+}
+
+/* Add subtle body background */
+body {
+    background-color: var(--bg-offwhite);
+}
+
+/* COMPLETELY REMOVE all hero background orbs and effects */
+.hero::before {
+    display: none !important;
+    content: none !important;
+}
+
+.hero::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* Remove any gradient orbs */
+.hero-orb, 
+.gradient-orb,
+.background-orb {
+    display: none !important;
+}
+
+/* Remove any animated gradient orbs that use ::before and ::after */
+.hero [class*="orb"]::before,
+.hero [class*="orb"]::after,
+.hero [class*="circle"]::before,
+.hero [class*="circle"]::after,
+.hero [class*="glow"]::before,
+.hero [class*="glow"]::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* Target specific orb animations */
+@keyframes floatOrb {
+    /* Empty animation to override any existing ones */
+    0%, 100% { transform: none; }
+}
+
+/* Remove any background patterns */
+.hero-grid,
+.hero-pattern,
+.hero-dots,
+.hero-lines,
+.hero-diagonal-lines {
+    display: none !important;
+}
+
+/* Set a clean indigo background for the hero section */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: var(--nav-height) 0 40px;
+    overflow: hidden;
+    background-color: var(--primary-indigo) !important; /* Use your indigo color variable */
+    color: white !important; /* Change text color to white for better contrast */
+    z-index: 1;
+}
+
+/* Add subtle texture overlay */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M0 0h20L0 20z'/%3E%3C/g%3E%3C/svg%3E");
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Update text styling for dark background */
+.gradient-text {
+    background: linear-gradient(135deg, #ffffff, #00BFA6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.animated-text {
+    color: white;
+    font-weight: 700;
+}
+
+.subtitle {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+}
+
+.welcome-text {
+    color: #00BFA6; /* Use your secondary green for contrast */
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    position: relative;
+    display: inline-block;
+}
+
+.hero-description {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-top: 1.5rem;
+}
+
+/* Update highlight text for dark background */
+.highlight-text {
+    position: relative;
+    display: inline-block;
+    font-weight: 600;
+    padding: 0 4px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.highlight-text::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    opacity: 0.25;
+    z-index: -1;
+    transition: all 0.3s ease;
+}
+
+.highlight-text:hover::before {
+    opacity: 0.4;
+    transform: scale(1.05);
+}
+
+.highlight-text.indigo {
+    color: white;
+}
+
+.highlight-text.indigo::before {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.highlight-text.green {
+    color: #00BFA6;
+}
+
+.highlight-text.green::before {
+    background-color: rgba(0, 191, 166, 0.3);
+}
+
+.highlight-text.gold {
+    color: var(--accent-gold);
+}
+
+.highlight-text.gold::before {
+    background-color: rgba(255, 180, 0, 0.3);
+}
+
+/* Ensure all hero content is visible against dark background */
+.hero-content {
+    position: relative;
+    z-index: 5;
+}
+
+/* Override any conflicting styles */
+.hero * {
+    color: inherit;
+}
+
+/* Remove any particle effects */
+.hero-particles,
+.particle,
+.particles-container,
+[class*="particle"] {
+    display: none !important;
+}
+
+/* Add animated gradient orbs */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, 
+        rgba(108, 99, 255, 0.15) 0%, 
+        rgba(108, 99, 255, 0.05) 30%, 
+        transparent 70%
+    );
+    border-radius: 50%;
+    animation: floatOrb 15s ease-in-out infinite alternate;
+    z-index: 0;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -30%;
+    width: 80%;
+    height: 80%;
+    background: radial-gradient(circle at center, 
+        rgba(0, 191, 166, 0.15) 0%, 
+        rgba(0, 191, 166, 0.05) 40%, 
+        transparent 70%
+    );
+    border-radius: 50%;
+    animation: floatOrb 20s ease-in-out infinite alternate-reverse;
+    z-index: 0;
+}
+
+/* Add floating particles */
+.hero-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-indigo), var(--secondary-green));
+    opacity: 0.2;
+    animation: floatParticle 15s linear infinite;
+}
+
+.particle:nth-child(1) { top: 20%; left: 10%; animation-duration: 20s; }
+.particle:nth-child(2) { top: 60%; left: 20%; animation-duration: 25s; animation-delay: 2s; }
+.particle:nth-child(3) { top: 40%; left: 60%; animation-duration: 18s; animation-delay: 5s; }
+.particle:nth-child(4) { top: 10%; left: 80%; animation-duration: 22s; animation-delay: 7s; }
+.particle:nth-child(5) { top: 70%; left: 70%; animation-duration: 24s; animation-delay: 3s; }
+.particle:nth-child(6) { top: 30%; left: 30%; animation-duration: 21s; animation-delay: 6s; }
+.particle:nth-child(7) { top: 80%; left: 40%; animation-duration: 19s; animation-delay: 4s; }
+
+/* Add mesh grid pattern */
+.hero-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(108, 99, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(108, 99, 255, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 1;
+}
+
+/* Animation keyframes */
+@keyframes floatOrb {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(5%, 5%) scale(1.1); }
+    100% { transform: translate(-5%, -5%) scale(0.9); }
+}
+
+@keyframes floatParticle {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.2; }
+    90% { opacity: 0.2; }
+    100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+}
+
+/* Ensure hero content stands out */
+.hero-content {
+    position: relative;
+    z-index: 5;
+}
+
+/* Make hero shapes more visible */
+.hero-shape {
+    opacity: 0.3;
+    filter: none;
+    z-index: 2;
+}
+
+/* Enhance geometric elements visibility */
+.geometric-elements div {
+    opacity: 0.6;
+    z-index: 3;
+}
+
+
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: var(--nav-height) 0 40px;
+    overflow: hidden;
+    background: linear-gradient(135deg, 
+        rgba(240, 244, 248, 0.9) 0%,
+        rgba(230, 237, 245, 0.9) 50%,
+        rgba(220, 230, 242, 0.9) 100%
+    );
+    z-index: 1;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.hero-text-container {
+    max-width: 600px;
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.hero-text-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px);
+    z-index: -1;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hero-text-bg {
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    right: -100px;
+    bottom: -100px;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.hero-shape {
+    position: absolute;
+    opacity: 0.3;
+    filter: none;
+    z-index: 2;
+    transition: all 0.5s ease;
+}
+
+/* Keep only the most distinctive robotics shapes */
+.hero-shape.robot-face {
+    width: 80px;
+    height: 100px;
+    background: rgba(108, 99, 255, 0.3); /* Darker fill */
+    border: 3px solid rgba(108, 99, 255, 0.6); /* Darker border */
+    border-radius: 15px;
+    top: 20%;
+    left: 10%;
+    animation: floatAndPulse 15s ease-in-out infinite;
+    opacity: 0.25;
+}
+
+.hero-shape.robot-face::before,
+.hero-shape.robot-face::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 180, 0, 0.5);
+    border-radius: 50%;
+    top: 30px;
+}
+
+.hero-shape.robot-face::before {
+    left: 15px;
+}
+
+.hero-shape.robot-face::after {
+    right: 15px;
+}
+
+.hero-shape.robot-mouth {
+    width: 40px;
+    height: 10px;
+    background: rgba(0, 191, 166, 0.6); /* Darker fill */
+    border-radius: 5px;
+    top: 70px;
+    left: 20px;
+    position: absolute;
+    z-index: 1;
+}
+
+.hero-shape.gear-large {
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 180, 0, 0.2); /* Darker fill */
+    border: 3px solid rgba(255, 180, 0, 0.5); /* Darker border */
+    border-radius: 50%;
+    bottom: 15%;
+    right: 10%;
+    position: relative;
+    animation: rotate 20s linear infinite;
+    opacity: 0.25;
+}
+
+.hero-shape.gear-large::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 100px;
+    background: rgba(255, 180, 0, 0.3);
+    left: 40px;
+    top: 0;
+}
+
+.hero-shape.gear-large::after {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 20px;
+    background: rgba(255, 180, 0, 0.3);
+    left: 0;
+    top: 40px;
+}
+
+.hero-shape.circuit-board {
+    width: 120px;
+    height: 120px;
+    background: 
+        linear-gradient(90deg, transparent 48%, rgba(0, 191, 166, 0.6) 48%, rgba(0, 191, 166, 0.6) 52%, transparent 52%) 0 0 / 20px 20px,
+        linear-gradient(0deg, transparent 48%, rgba(0, 191, 166, 0.6) 48%, rgba(0, 191, 166, 0.6) 52%, transparent 52%) 0 0 / 20px 20px;
+    top: 15%;
+    right: 15%;
+    animation: floatAndRotate 25s ease-in-out infinite 3s;
+    opacity: 0.3;
+}
+
+.hero-shape.circuit-board::after {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 180, 0, 0.4) 0%, rgba(255, 180, 0, 0.4) 40%, transparent 40%);
+    top: 45px;
+    left: 45px;
+}
+
+.hero-shape.robotic-arm {
+    width: 120px;
+    height: 80px;
+    border-left: 4px solid rgba(0, 191, 166, 0.6);
+    border-bottom: 4px solid rgba(0, 191, 166, 0.6);
+    border-radius: 0 0 0 20px;
+    top: 60%;
+    left: 20%;
+    transform-origin: bottom left;
+    animation: armMove 8s ease-in-out infinite;
+    opacity: 0.2;
+}
+
+.hero-shape.robotic-arm::before {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 4px;
+    background: rgba(0, 191, 166, 0.6);
+    bottom: -4px;
+    left: 100%;
+    transform-origin: left;
+    animation: gripperMove 8s ease-in-out infinite;
+}
+
+@keyframes floatAndRotate {
+    0%, 100% { 
+        transform: translateY(0) rotate(0deg); 
+        opacity: 0.15;
+    }
+    50% { 
+        transform: translateY(-20px) rotate(10deg); 
+        opacity: 0.25;
+    }
+}
+
+@keyframes floatAndPulse {
+    0%, 100% { 
+        transform: translateY(0) scale(1); 
+        opacity: 0.15;
+    }
+    50% { 
+        transform: translateY(-15px) scale(1.1); 
+        opacity: 0.25;
+    }
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes armMove {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-30deg); }
+}
+
+@keyframes gripperMove {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(45deg); }
+}
+
+/* Add animated gradient orbs */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, 
+        rgba(108, 99, 255, 0.15) 0%, 
+        rgba(108, 99, 255, 0.05) 30%, 
+        transparent 70%
+    );
+    border-radius: 50%;
+    animation: floatOrb 15s ease-in-out infinite alternate;
+    z-index: 0;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -30%;
+    width: 80%;
+    height: 80%;
+    background: radial-gradient(circle at center, 
+        rgba(0, 191, 166, 0.15) 0%, 
+        rgba(0, 191, 166, 0.05) 40%, 
+        transparent 70%
+    );
+    border-radius: 50%;
+    animation: floatOrb 20s ease-in-out infinite alternate-reverse;
+    z-index: 0;
+}
+
+/* Add floating particles */
+.hero-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-indigo), var(--secondary-green));
+    opacity: 0.2;
+    animation: floatParticle 15s linear infinite;
+}
+
+.particle:nth-child(1) { top: 20%; left: 10%; animation-duration: 20s; }
+.particle:nth-child(2) { top: 60%; left: 20%; animation-duration: 25s; animation-delay: 2s; }
+.particle:nth-child(3) { top: 40%; left: 60%; animation-duration: 18s; animation-delay: 5s; }
+.particle:nth-child(4) { top: 10%; left: 80%; animation-duration: 22s; animation-delay: 7s; }
+.particle:nth-child(5) { top: 70%; left: 70%; animation-duration: 24s; animation-delay: 3s; }
+.particle:nth-child(6) { top: 30%; left: 30%; animation-duration: 21s; animation-delay: 6s; }
+.particle:nth-child(7) { top: 80%; left: 40%; animation-duration: 19s; animation-delay: 4s; }
+
+/* Add mesh grid pattern */
+.hero-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(108, 99, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(108, 99, 255, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: 1;
+}
+
+/* Animation keyframes */
+@keyframes floatOrb {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(5%, 5%) scale(1.1); }
+    100% { transform: translate(-5%, -5%) scale(0.9); }
+}
+
+@keyframes floatParticle {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.2; }
+    90% { opacity: 0.2; }
+    100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+}
+
+/* Ensure hero content stands out */
+.hero-content {
+    position: relative;
+    z-index: 5;
+}
+
+/* Make hero shapes more visible */
+.hero-shape {
+    opacity: 0.3;
+    filter: none;
+    z-index: 2;
+}
+
+
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes armMove {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-30deg); }
+}
+
+@keyframes gripperMove {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(45deg); }
+}
+
+/* Add a simple, sweet background with texture */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: var(--nav-height) 0 40px;
+    overflow: hidden;
+    background: linear-gradient(135deg, 
+        rgba(240, 244, 248, 0.9) 0%,
+        rgba(230, 237, 245, 0.9) 50%,
+        rgba(220, 230, 242, 0.9) 100%
+    );
+    z-index: 1;
+}
+
+/* Add subtle pattern overlay */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%236c63ff' fill-opacity='0.05'%3E%3Cpath d='M0 0h20L0 20z'/%3E%3C/g%3E%3C/svg%3E");
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Enhance geometric elements visibility */
+.geometric-elements div {
+    opacity: 0.5; /* Increased from default */
+}
+
+.geo-circle {
+    border: 2px solid rgba(108, 99, 255, 0.5); /* Darker border */
+}
+
+.geo-square {
+    border: 2px solid rgba(0, 191, 166, 0.5); /* Darker border */
+}
+
+.geo-dots {
+    background: radial-gradient(circle, rgba(255, 180, 0, 0.5) 2px, transparent 2px) 0 0 / 15px 15px; /* Darker dots */
+}
+
+.geo-line {
+    background: linear-gradient(90deg, transparent, rgba(108, 99, 255, 0.5), transparent); /* Darker line */
+}
+
+/* Ensure text is readable against new background */
+.gradient-text {
+    text-shadow: 0 2px 10px rgba(108, 99, 255, 0.2); /* Add subtle shadow */
+}
+
+.animated-text {
+    color: #2D2D2D; /* Ensure dark text */
+}
+
+.subtitle {
+    color: #4a4a4a; /* Slightly lighter than main text */
+}
+
+.hero-description {
+    color: #4a4a4a; /* Slightly lighter than main text */
+}
+
+/* Create clear separation between hero and about section */
+.about-section {
+    margin-top: 0; /* Remove negative margin if present */
+}
+
+/* About Section */
+.about-section {
+    position: relative;
+    overflow: hidden;
+    padding: 8rem 0; /* Reduced from 10rem to 8rem */
+    color: white;
+    background: #1f2937; /* Fallback color */
+    margin-top: -2rem; /* Added negative margin to pull section up */
+}
+
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+    filter: brightness(0.9) contrast(1.1);
+}
+
+.video-background::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(31, 41, 55, 0.85) 0%,    /* Darker overlay */
+        rgba(55, 65, 81, 0.75) 25%,
+        rgba(75, 85, 99, 0.75) 50%,
+        rgba(55, 65, 81, 0.75) 75%,
+        rgba(31, 41, 55, 0.85) 100%
+    );
+    backdrop-filter: blur(1px);
+}
+
+.about-content {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    align-items: center;
+}
+
+/* New image container styles */
+.about-image-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 20px; /* Space for bottom accent */
+    padding-right: 20px; /* Space for right accent */
+}
+
+.about-image {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(108, 99, 255, 0.2);
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.about-image:hover {
+    transform: scale(1.02);
+}
+
+.image-accent {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border: 3px solid var(--secondary-green);
+    z-index: -1;
+}
+
+.image-accent.top-right {
+/* Update projects grid to have 2 projects per row */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns instead of auto-fill */
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr); /* Keep 2 columns on medium screens */
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr; /* Single column on mobile */
+        gap: 2rem;
+    }
+}
+    top: -20px;
+    right: -20px;
+    border-radius: 0 20px 0 0;
+    border-bottom: none;
+    border-left: none;
+}
+
+.image-accent.bottom-left {
+    bottom: -20px;
+    left: -20px;
+    border-radius: 0 0 0 20px;
+    border-top: none;
+    border-right: none;
+}
+
+/* Completely new, simplified image styling with right margin */
+.portrait-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; /* Align to the right */
+    align-items: flex-start;
+    padding-right: 0; /* Reset padding */
+    transform: translateX(0.7cm); /* Move 0.7cm to the right */
+}
+
+.portrait-image {
+    max-width: 90%; /* Slightly reduce width to prevent overflow */
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(108, 99, 255, 0.2);
+}
+
+@media (max-width: 992px) {
+    .portrait-container {
+        justify-content: center; /* Center on mobile */
+        transform: translateX(0); /* Reset transform on mobile */
+    }
+    
+    .portrait-image {
+        max-width: 100%;
+    }
+}
+
+/* Enhanced gradient overlay for the entire section */
+.about-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        rgba(31, 41, 55, 0.1),
+        rgba(75, 85, 99, 0.1)
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+.lead-text {
+    font-size: 2.4rem; /* Increased from 2.2rem */
+    font-weight: 600;
+    margin-bottom: 2rem;
+    line-height: 1.4;
+    background: linear-gradient(135deg, 
+        #ffffff 0%,
+        #e5e7eb 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.main-text {
+    font-size: 1.3rem; /* Increased from 1.2rem */
+    line-height: 1.9;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 0; /* Removed bottom margin since there's no content after it */
+    font-weight: 400;
+    letter-spacing: 0.3px;
+}
+
+.skills-container {
+    margin-top: 3rem;
+}
+
+.skills-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.skill-tag {
+    background: linear-gradient(135deg,
+        rgba(55, 65, 81, 0.9),
+        rgba(75, 85, 99, 0.9)
+    );
+    border: 1px solid rgba(156, 163, 175, 0.2);
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 500;
+    color: white;
+    text-align: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(1px);
+}
+
+.skill-tag:hover {
+    background: linear-gradient(135deg,
+        rgba(75, 85, 99, 0.95),
+        rgba(107, 114, 128, 0.95)
+    );
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Add smooth animation for content */
+.about-description, .skills-container {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .section-title {
+        font-size: 3rem;
+    }
+    
+    .lead-text {
+        font-size: 2rem;
+    }
+    
+    .about-description {
+        padding: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2.5rem;
+    }
+    
+    .lead-text {
+        font-size: 1.8rem;
+    }
+    
+    .main-text {
+        font-size: 1.1rem;
+    }
+    
+    .about-description {
+        padding: 2rem;
+    }
+}
+
+/* Geometric Elements */
+.geometric-elements {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.geo-circle {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border: 2px solid var(--primary-indigo);
+    border-radius: 50%;
+    top: 10%;
+    right: 5%;
+    opacity: 0.3;
+    animation: float 6s ease-in-out infinite;
+}
+
+.geo-square {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border: 2px solid var(--secondary-green);
+    bottom: 15%;
+    left: 5%;
+    opacity: 0.3;
+    animation: rotate 8s linear infinite;
+}
+
+.geo-dots {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, var(--accent-gold) 2px, transparent 2px) 0 0 / 15px 15px;
+    top: 20%;
+    left: 0;
+    opacity: 0.2;
+    animation: float 7s ease-in-out infinite reverse;
+}
+
+.geo-line {
+    position: absolute;
+    width: 150px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary-indigo), transparent);
+    bottom: 20%;
+    right: 0;
+    opacity: 0.3;
+    animation: pulse 4s ease-in-out infinite;
+}
+
+/* Corner Accents */
+.corner-accent {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--primary-indigo);
+    opacity: 0.5;
+}
+
+.corner-accent.top-left {
+    top: 0;
+    left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 10px 0 0 0;
+}
+
+.corner-accent.top-right {
+    top: 0;
+    right: 0;
+    border-left: 0;
+    border-bottom: 0;
+    border-radius: 0 10px 0 0;
+}
+
+.corner-accent.bottom-left {
+    bottom: 0;
+    left: 0;
+    border-right: 0;
+    border-top: 0;
+    border-radius: 0 0 0 10px;
+}
+
+.corner-accent.bottom-right {
+    bottom: 0;
+    right: 0;
+    border-left: 0;
+    border-top: 0;
+    border-radius: 0 0 10px 0;
+}
+
+/* Floating Elements */
+.floating-elements > div {
+    position: absolute;
+    opacity: 0.6;
+    filter: blur(1px);
+}
+
+.tech-circle {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--secondary-green);
+    border-radius: 50%;
+    top: 30%;
+    left: -50px;
+    animation: float 5s ease-in-out infinite;
+}
+
+.tech-square {
+    width: 35px;
+    height: 35px;
+    border: 2px solid var(--primary-indigo);
+    right: -40px;
+    top: 40%;
+    animation: rotate 7s linear infinite;
+}
+
+.tech-triangle {
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 35px solid rgba(108, 99, 255, 0.2);
+    bottom: 20%;
+    left: -30px;
+    animation: float 6s ease-in-out infinite reverse;
+}
+
+/* Animations */
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+}
+
+@keyframes borderRotate {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .profile-frame {
+        width: 320px;
+        height: 320px;
+    }
+    
+    .geometric-elements {
+        transform: scale(0.8);
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-frame {
+        width: 280px;
+        height: 280px;
+    }
+    
+    .geometric-elements {
+        transform: scale(0.7);
+    }
+}
+
+.about-media {
+    position: relative;
+}
+
+.casual-photo {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(108, 99, 255, 0.2);
+    transition: transform 0.5s ease;
+}
+
+.casual-photo:hover {
+    transform: scale(1.02);
+}
+
+.experience-card {
+    position: absolute;
+    bottom: -30px;
+    right: -30px;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.experience-card .number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-indigo);
+    display: block;
+}
+
+.experience-card .text {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    opacity: 0.8;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .hero-content,
+    .about-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hamburger-menu {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 1rem 0;
+        text-align: left;
+    }
+
+    .profile-image-container {
+        width: 300px;
+        height: 400px;
+    }
+    
+    .casual-photo {
+        height: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-image-container {
+        width: 280px;
+        height: 350px;
+    }
+    
+    .casual-photo {
+        height: 300px;
+    }
+}
+
+/* Modern gradient text effects */
+.gradient-text {
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 700;
+    font-size: 4rem;
+    letter-spacing: -0.5px;
+    text-shadow: 3px 3px 20px rgba(108, 99, 255, 0.2);
+}
+
+.hero-content h1 {
+    font-size: 5rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    font-weight: 800;
+}
+
+.hero-content .subtitle {
+    font-size: 1.8rem;
+    background: var(--gradient-2);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+/* Glowing background effect */
+.hero::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(108, 99, 255, 0.1), transparent 70%);
+    pointer-events: none;
+}
+
+/* Enhanced glass morphism */
+.glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 
+        0 8px 32px rgba(108, 99, 255, 0.1),
+        inset 0 0 32px rgba(255, 255, 255, 0.5);
+    transition: all 0.4s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 
+        0 20px 40px rgba(108, 99, 255, 0.15),
+        inset 0 0 32px rgba(255, 255, 255, 0.8);
+}
+
+/* Animated skill tags */
+.skill-tag {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(108, 99, 255, 0.2);
+    color: var(--primary-indigo);
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(108, 99, 255, 0.1);
+}
+
+.skill-tag:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(108, 99, 255, 0.3);
+}
+
+/* Animated background shapes */
+.bg-shapes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--primary-indigo), var(--secondary-green));
+    opacity: 0.1;
+    filter: blur(50px);
+}
+
+.shape-1 { width: 300px; height: 300px; top: 20%; left: 10%; }
+.shape-2 { width: 400px; height: 400px; top: 50%; right: 15%; }
+.shape-3 { width: 200px; height: 200px; bottom: 10%; left: 20%; }
+
+.contact-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 0;
+}
+
+.social-links {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.social-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-1);
+    border-radius: 50%;
+    color: white;
+    font-size: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(108, 99, 255, 0.2);
+}
+
+.profile-image-container {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-frame {
+    position: relative;
+    width: 380px;
+    height: 380px;
+    padding: 20px;
+    z-index: 2;
+}
+
+.frame-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 3px;
+    background: linear-gradient(135deg, var(--primary-indigo), var(--secondary-green));
+    border-radius: 20px;
+    background-size: 200% 200%;
+    animation: gentleGradient 8s ease infinite;
+}
+
+@keyframes gentleGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.gradient-border {
+    background: white;
+    border-radius: 18px;
+    padding: 2px;
+    height: 100%;
+}
+
+.image-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 
+        0 10px 30px rgba(108, 99, 255, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.8);
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.profile-image:hover {
+    transform: scale(1.02);
+}
+
+/* Geometric Elements */
+.geometric-elements {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.geo-circle {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border: 2px solid var(--primary-indigo);
+    border-radius: 50%;
+    top: 10%;
+    right: 5%;
+    opacity: 0.3;
+    animation: float 6s ease-in-out infinite;
+}
+
+.geo-square {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border: 2px solid var(--secondary-green);
+    bottom: 15%;
+    left: 5%;
+    opacity: 0.3;
+    animation: rotate 8s linear infinite;
+}
+
+.geo-dots {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, var(--accent-gold) 2px, transparent 2px) 0 0 / 15px 15px;
+    top: 20%;
+    left: 0;
+    opacity: 0.2;
+    animation: float 7s ease-in-out infinite reverse;
+}
+
+.geo-line {
+    position: absolute;
+    width: 150px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary-indigo), transparent);
+    bottom: 20%;
+    right: 0;
+    opacity: 0.3;
+    animation: pulse 4s ease-in-out infinite;
+}
+
+/* Corner Accents */
+.corner-accent {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--primary-indigo);
+    opacity: 0.5;
+}
+
+.corner-accent.top-left {
+    top: 0;
+    left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 10px 0 0 0;
+}
+
+.corner-accent.top-right {
+    top: 0;
+    right: 0;
+    border-left: 0;
+    border-bottom: 0;
+    border-radius: 0 10px 0 0;
+}
+
+.corner-accent.bottom-left {
+    bottom: 0;
+    left: 0;
+    border-right: 0;
+    border-top: 0;
+    border-radius: 0 0 0 10px;
+}
+
+.corner-accent.bottom-right {
+    bottom: 0;
+    right: 0;
+    border-left: 0;
+    border-top: 0;
+    border-radius: 0 0 10px 0;
+}
+
+/* Floating Elements */
+.floating-elements > div {
+    position: absolute;
+    opacity: 0.6;
+    filter: blur(1px);
+}
+
+.tech-circle {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--secondary-green);
+    border-radius: 50%;
+    top: 30%;
+    left: -50px;
+    animation: float 5s ease-in-out infinite;
+}
+
+.tech-square {
+    width: 35px;
+    height: 35px;
+    border: 2px solid var(--primary-indigo);
+    right: -40px;
+    top: 40%;
+    animation: rotate 7s linear infinite;
+}
+
+/* Add paper-like texture to the hero section background */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+}
+
+/* Enhanced Resume/CV Section */
+.resume-section {
+    padding: 6rem 0;
+    position: relative;
+    background: linear-gradient(135deg, rgba(249, 249, 246, 0.9), rgba(245, 245, 250, 0.9));
+    overflow: hidden;
+}
+
+/* Add a subtle pattern overlay */
+.resume-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236C63FF' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    z-index: 0;
+}
+
+.resume-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0;
+}
+
+.resume-card {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 
+        0 20px 40px rgba(108, 99, 255, 0.1),
+        0 0 0 1px rgba(108, 99, 255, 0.05);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.resume-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 
+        0 30px 60px rgba(108, 99, 255, 0.15),
+        0 0 0 1px rgba(108, 99, 255, 0.1);
+}
+
+.resume-card-inner {
+    display: flex;
+    align-items: center;
+    padding: 3rem;
+    position: relative;
+    z-index: 2;
+}
+
+.resume-icon {
+    flex: 0 0 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--primary-indigo), var(--secondary-green));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 2rem;
+    color: white;
+    font-size: 2rem;
+    box-shadow: 0 10px 20px rgba(108, 99, 255, 0.2);
+}
+
+.resume-text {
+    flex: 1;
+}
+
+.resume-text h3 {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+}
+
+.resume-text p {
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.download-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(135deg, var(--primary-indigo), var(--secondary-green));
+    color: white;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(108, 99, 255, 0.2);
+}
+
+.download-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(108, 99, 255, 0.3);
+}
+
+.download-button span {
+    margin-right: 0.8rem;
+}
+
+/* Decorative elements */
+.resume-decoration {
+    position: absolute;
+    z-index: 1;
+    opacity: 0.1;
+}
+
+.resume-decoration.circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: var(--primary-indigo);
+    top: -50px;
+    right: -50px;
+}
+/* Remove blue background from hero section */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: var(--nav-height) 0 40px;
+    overflow: hidden;
+    background: var(--bg-offwhite) !important; /* Force light background */
+    color: var(--text-dark);
+    z-index: 1;
+}
+
+/* Remove any blue gradient backgrounds */
+.hero::before,
+.hero::after,
+.hero > div::before,
+.hero > div::after {
+    background: none !important;
+    background-color: transparent !important;
+    background-image: none !important;
+}
+
+/* Target specific blue background elements */
+.hero-background,
+.hero-bg,
+.background-gradient,
+.bg-gradient,
+.hero-gradient {
+    display: none !important;
+    background: none !important;
+    background-color: transparent !important;
+    opacity: 0 !important;
+}
+
+/* Ensure the image background is preserved */
+.hero {
+    background-image: url('image_video_pdf/i5.jpg') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
+/* Maintain the white overlay for readability */
+.hero::before {
+    content: '' !important;
+    display: block !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    z-index: 2 !important;
+    pointer-events: none !important;
+}
+
+/* Ensure content is above the overlay */
+.hero-content {
+    position: relative;
+    z-index: 3 !important;
+}
+
+.resume-decoration.square {
+    width: 100px;
+    height: 100px;
+    background: var(--secondary-green);
+    bottom: -20px;
+    left: 10%;
+    transform: rotate(45deg);
+}
+
+.resume-decoration.triangle {
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 35px solid rgba(108, 99, 255, 0.2);
+    bottom: 20%;
+    left: -30px;
+    animation: float 6s ease-in-out infinite reverse;
+}
+
+/* Restore original project tags styling */
+.project-tag {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    background-color: rgba(108, 99, 255, 0.1);
+    color: var(--primary-indigo);
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.project-tag:hover {
+    background-color: rgba(108, 99, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0; /* Remove auto margin */
+    margin-bottom: 0.5rem;
+}
+
+/* Adjust project info to maintain original layout */
+.project-info {
+    padding: 1.5rem;
+    position: relative;
+    height: auto; /* Remove fixed height */
+    min-height: 320px; /* Use min-height instead for flexibility */
+    display: block; /* Restore original display */
+}
+
+/* Ensure description maintains proper spacing */
+.project-desc {
+    margin-bottom: 1rem;
+}
+    border-left: 70px solid transparent;
+    border-right: 70px solid transparent;
+    border-bottom: 120px solid var(--accent-gold);
+    opacity: 0.05;
+    bottom: -50px;
+    right: 20%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .resume-card-inner {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem;
+    }
+    
+    .resume-icon {
+        margin-right: 0;
+        margin-bottom: 1.5rem;
+    }
+    
+    .resume-text p {
+        margin-bottom: 2rem;
+    }
+    
+    .resume-decoration.circle {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .resume-decoration.square {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .resume-decoration.triangle {
+        border-left: 50px solid transparent;
+        border-right: 50px solid transparent;
+        border-bottom: 80px solid var(--accent-gold);
+    }
+}
+    align-items: center;
+    padding: var(--nav-height) 0 40px;
+    overflow: hidden;
+    background-color: white !important; /* White background */
+    background-image: none !important; /* Remove any background images */
+    z-index: 1;
+}
+
+/* Remove any background patterns or overlays */
+.hero::before,
+.hero::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* Ensure text colors work well on white background */
+.hero-content h1,
+.animated-text {
+    color: var(--text-dark);
+}
+
+.welcome-text {
+    color: var(--primary-indigo);
+}
+
+.hero-description {
+    color: #4a4a4a;
+}
+
+/* Mobile Responsiveness */
+
+/* Base responsive adjustments */
+@media (max-width: 992px) {
+    /* General adjustments */
+    .container {
+        padding: 0 1.5rem;
+    }
+    
+    /* Navigation adjustments */
+    .nav-container {
+        padding: 0 1rem;
+    }
+    
+    .hamburger-menu {
+        display: flex;
+    }
+    
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: var(--nav-height);
+        left: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        padding: 1rem 0;
+        z-index: 100;
+    }
+    
+    .nav-links.active {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .nav-link {
+        padding: 1rem 2rem;
+        width: 100%;
+        text-align: left;
+    }
+    
+    /* Hero section adjustments */
+    .hero-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .hero-image-wrapper {
+        order: -1;
+        margin: 0 auto;
+    }
+    
+    .profile-image-container {
+        width: 320px;
+        height: 320px;
+    }
+    
+    .profile-frame {
+        width: 300px;
+        height: 300px;
+    }
+    
+    .geometric-elements {
+        transform: scale(0.8);
+    }
+    
+    /* About section adjustments */
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .portrait-container {
+        order: -1;
+        margin: 0 auto;
+        transform: translateX(0);
+    }
+    
+    .portrait-image {
+        max-width: 90%;
+        margin: 0 auto;
+        display: block;
+    }
+    
+    .scrollable-content {
+        width: 100%;
+        margin-left: 0;
+    }
+    
+    /* Projects section adjustments */
+    .projects-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 2rem;
+    }
+}
+
+/* Smaller mobile devices */
+@media (max-width: 768px) {
+    /* General adjustments */
+    .container {
+        padding: 0 1rem;
+    }
+    
+    /* Hero section adjustments */
+    .hero {
+        padding-top: calc(var(--nav-height) + 2rem);
+    }
+    
+    h1 {
+        font-size: 2.5rem;
+    }
+    
+    .subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+    }
+    
+    .profile-image-container {
+        width: 280px;
+        height: 280px;
+    }
+    
+    .profile-frame {
+        width: 260px;
+        height: 260px;
+    }
+    
+    /* About section adjustments */
+    .section-title {
+        font-size: 2.5rem;
+    }
+    
+    .main-text {
+        font-size: 1rem;
+        line-height: 1.7;
+    }
+    
+    .scrollable-content {
+        max-height: 400px;
+        padding: 1.5rem;
+    }
+    
+    .portrait-image {
+        max-width: 100%;
+    }
+    
+    /* Projects section adjustments */
+    .project-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .project-thumbnail {
+        height: 180px;
+    }
+    
+    /* Contact section adjustments */
+    .social-links {
+        gap: 1.5rem;
+    }
+    
+    .social-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    /* Navigation adjustments */
+    .logo-text {
+        display: none;
+    }
+    
+    .logo-circle {
+        margin-right: 0;
+    }
+    
+    /* Hero section adjustments */
+    h1 {
+        font-size: 2.2rem;
+    }
+    
+    .subtitle {
+        font-size: 0.8rem;
+        flex-direction: column;
+    }
+    
+    .separator {
+        display: none;
+    }
+    
+    .profile-image-container {
+        width: 240px;
+        height: 240px;
+    }
+    
+    .profile-frame {
+        width: 220px;
+        height: 220px;
+    }
+    
+    /* About section adjustments */
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .scrollable-content {
+        padding: 1rem;
+    }
+    
+    /* Projects section adjustments */
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .project-thumbnail {
+        height: 200px;
+    }
+    
+    /* Contact section adjustments */
+    .social-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+/* Fix for mobile viewport height */
+@media (max-width: 992px) {
+    .hero {
+        min-height: calc(100vh - var(--nav-height));
+        height: auto;
+    }
+    
+    section {
+        padding: 4rem 0;
+    }
+}
+
+/* Improve touch targets on mobile */
+@media (max-width: 992px) {
+    button, 
+    .nav-link,
+    .social-icon,
+    .project-link {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .nav-link {
+        padding: 1rem 1.5rem;
+    }
+}
+
+/* Fix for mobile navigation */
+@media (max-width: 992px) {
+    .glass-nav {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+    
+    .hamburger-menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 21px;
+        cursor: pointer;
+        z-index: 200;
+    }
+    
+    .hamburger-menu span {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background-color: var(--text-dark);
+        border-radius: 3px;
+        transition: all 0.3s ease;
+    }
+    
+    .hamburger-menu.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    .hamburger-menu.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .hamburger-menu.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -7px);
+    }
+}
+
+/* Fix mobile menu click issues */
+@media (max-width: 992px) {
+    /* Larger touch targets for navigation */
+    .nav-link {
+        padding: 15px 20px !important;
+        display: block !important;
+        width: 100% !important;
+        font-size: 16px !important;
+    }
+    
+    /* Ensure hamburger menu is easily tappable */
+    .hamburger-menu {
+        padding: 15px !important;
+        margin: -15px !important;
+        cursor: pointer !important;
+        z-index: 1000 !important;
+    }
+    
+    /* Make nav links container full width */
+    .nav-links.active {
+        display: flex !important;
+        flex-direction: column !important;
+        position: absolute !important;
+        top: var(--nav-height) !important;
+        left: 0 !important;
+        width: 100% !important;
+        background: rgba(255, 255, 255, 0.98) !important;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+        padding: 0 !important;
+        z-index: 1000 !important;
+    }
+    
+    /* Add visual feedback for active state */
+    .nav-link:active {
+        background-color: rgba(108, 99, 255, 0.1) !important;
+    }
+    
+    /* Ensure proper z-index hierarchy */
+    .glass-nav {
+        z-index: 1000 !important;
+    }
+    
+    .nav-container {
+        position: relative !important;
+        z-index: 1000 !important;
+    }
+}
+/* Add background image to hero section without changing other elements */
+.hero {
+    background-image: url('image_video_pdf/i5.jpg') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
+/* Add white overlay for readability */
+.hero::before {
+    content: '' !important;
+    display: block !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    z-index: 2 !important;
+    pointer-events: none !important;
+}
+
+/* Ensure content stays above background */
+.hero-content,
+.hero .container,
+.hero-text-container,
+.hero-image-wrapper,
+.profile-image-container {
+    position: relative !important;
+    z-index: 5 !important;
+}
+
+/* Preserve profile photo styling */
+.profile-image-container,
+.image-wrapper,
+.profile-image {
+    /* Keep original styling */
+}
+
+/* Target and remove specific rotating elements */
+/* First, let's target by animation */
+[style*="animation"], 
+[style*="rotate"],
+[style*="spin"],
+[style*="circle"],
+[style*="ellipse"] {
+    animation: none !important;
+    display: none !important;
+}
+
+/* Target specific large white elements in the background */
+.hero::before,
+.hero::after,
+.hero > div::before,
+.hero > div::after,
+.hero-background::before,
+.hero-background::after,
+.hero-content::before,
+.hero-content::after,
+.hero-particles::before,
+.hero-particles::after {.
+    display: none !important;
+    content: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+/* Target any large circular/elliptical elements */
+.hero-orb, 
+.gradient-orb,
+.background-orb,
+.hero-circle,
+.background-circle,
+.rotating-circle,
+.hero-ellipse,
+.background-ellipse,
+.rotating-ellipse,
+.floating-circle,
+.floating-ellipse,
+.glow-circle,
+.glow-ellipse,
+.hero-glow,
+.background-glow {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    transform: scale(0) !important;
+}
+
+
+/* Add white overlay for readability */
+.projects-section::before {
+    content: '' !important;
+    display: block !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    z-index: 2 !important;
+    pointer-events: none !important;
+}
+
+/* Ensure content stays above background */
+.projects-section .container {
+    position: relative !important;
+    z-index: 5 !important;
+}
+
+/* Center the section title */
+.projects-section .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+/* Remove any conflicting styles */
+.projects-section > div:not(.container):not(.section-header):not(.projects-grid):not(.project-card) {
+    display: none !important;
+}
+
+/* Add a subtle gradient background as fallback */
+.projects-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        rgba(249, 249, 246, 0.97) 0%,
+        rgba(245, 245, 250, 0.95) 100%);
+    z-index: -1;
+}
+
+/* Sleek, modern project cards with visual impact */
+.projects-section {
+    padding: 6rem 0;
+    background-color: #f5f5f7;
+    position: relative;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+.project-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+    transition: all 0.4s ease;
+    position: relative;
+    border: 1px solid rgba(240, 240, 240, 0.9);
+}
+
+.project-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 20px 30px rgba(108, 99, 255, 0.12);
+    border-color: rgba(108, 99, 255, 0.2);
+}
+
+.project-thumbnail {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+}
+
+.project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+    filter: brightness(0.95);
+}
+
+.project-card:hover .project-img {
+    transform: scale(1.08);
+    filter: brightness(1.05);
+}
+
+.project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, 
+        rgba(0, 0, 0, 0.7) 0%,
+        rgba(0, 0, 0, 0.3) 50%,
+        rgba(0, 0, 0, 0.1) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.project-card:hover .project-overlay {
+    opacity: 1;
+}
+
+.project-link {
+    width: 48px;
+    height: 48px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--primary-indigo);
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    transform: translateY(20px);
+    opacity: 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.project-card:hover .project-link {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.project-card:hover .project-link:nth-child(1) {
+    transition-delay: 0.05s;
+}
+
+.project-card:hover .project-link:nth-child(2) {
+    transition-delay: 0.1s;
+}
+    transition-delay: 0.15s;
+}
+
+.project-link:hover {
+    background: var(--primary-indigo);
+    color: white;
+    transform: scale(1.15);
+}
+
+.project-info {
+    padding: 1.8rem;
+    position: relative;
+}
+
+.project-number {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary-indigo);
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    position: relative;
+}
+
+.project-number::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: var(--primary-indigo);
+    border-radius: 2px;
+}
+
+.project-title {
+    font-size: 1.3rem; /* Reduced from 1.6rem */
+    font-weight: 700;
+    margin-bottom: 0.7rem; /* Reduced from 0.9rem */
+    color: #1d1d1f;
+    transition: color 0.3s ease;
+    line-height: 1.3; /* Added for better readability */
+}
+
+.project-card:hover .project-title {
+    color: var(--primary-indigo);
+}
+
+.project-desc {
+    font-size: 0.9rem; /* Slightly smaller font */
+    line-height: 1.6;
+    color: #515154;
+    margin-bottom: 1.2rem;
+    max-height: 160px; /* Increased from 120px to show more text */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding-right: 5px; /* Space for scrollbar */
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: rgba(108, 99, 255, 0.5) transparent; /* Firefox */
+}
+
+/* Custom scrollbar for webkit browsers (Chrome, Safari, Edge) */
+.project-desc::-webkit-scrollbar {
+    width: 4px;
+}
+
+.project-desc::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+}
+
+.project-desc::-webkit-scrollbar-thumb {
+    background: rgba(108, 99, 255, 0.5);
+    border-radius: 10px;
+}
+
+.project-desc::-webkit-scrollbar-thumb:hover {
+    background: rgba(108, 99, 255, 0.7);
+}
+
+/* Remove the line-clamp that was limiting text to 3 lines */
+.project-desc {
+    -webkit-line-clamp: unset;
+    display: block;
+}
+
+/* Adjust project card height to accommodate larger description area */
+.project-info {
+    padding: 1.5rem;
+    position: relative;
+    height: 320px; /* Increased from 280px */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ensure tags stay at the bottom */
+.project-tags {
+    margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .project-title {
+        font-size: 1.2rem;
+    }
+    
+    .project-info {
+        height: 300px; /* Increased from 260px */
+    }
+}
+
+@media (max-width: 768px) {
+    .project-info {
+        height: 280px; /* Increased from 240px */
+    }
+}
+
+/* Add a sleek accent line */
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 0;
+    background: linear-gradient(to bottom, var(--primary-indigo), var(--secondary-green));
+    transition: height 0.4s ease;
+    z-index: 1;
+}
+
+.project-card:hover::before {
+    height: 100%;
+}
+
+/* Add a subtle shine effect */
+.project-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(30deg);
+    transition: transform 0.7s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.project-card:hover::after {
+    transform: rotate(30deg) translate(0, 50%);
+    opacity: 1;
+}
+    background-position: center !important;
+}
+
+/* Blinking text animation */
+.blink-text {
+    position: relative;
+    display: inline-block;
+}
+
+.blink-text::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(255, 255, 255, 0.8) 50%,
+        transparent 100%
+    );
+    animation: textBlink 3s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+    opacity: 0;
+    pointer-events: none;
+}
+
+@keyframes textBlink {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    20% {
+        opacity: 0.3;
+    }
+    40% {
+        opacity: 0.6;
+    }
+    60% {
+        opacity: 0.3;
+    }
+    80% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+/* Alternative blinking style */
+.blink-text {
+    animation: simpleBlink 3s ease-in-out infinite;
+}
+
+@keyframes simpleBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* Text glow effect */
+.glow-text {
+    position: relative;
+    display: inline-block;
+    color: var(--primary-indigo);
+}
+
+.glow-text::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-indigo);
+    opacity: 0.5;
+    border-radius: 4px;
+    filter: blur(2px);
+    z-index: -1;
+    animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+    0% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    animation: textGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+    from {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+    to {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
+                     0 0 30px rgba(108, 99, 255, 0.6);
+    }
+}
+
+.welcome-text {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    color: var(--primary-indigo);
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+}
+
+.welcome-text::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--primary-indigo), var(--secondary-green), var(--accent-gold));
+    background-size: 200% 100%;
+    animation: gradientMove 3s linear infinite;
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Bold, futuristic About section with white text */
+.about-text-container {
+    max-width: 100%;
+    padding: 0;
+    position: relative;
+    z-index: 5;
+}
+
+/* Cool, futuristic scrollable content area with consistent color */
+.scrollable-content {
+    max-height: 500px;
+    overflow-y: auto;
+    padding: 2rem;
+    margin-right: 1rem;
+    /* Consistent background color */
+    background: rgba(31, 41, 55, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    border-left: 4px solid var(--primary-indigo);
+    box-shadow: 
+        0 0 30px rgba(108, 99, 255, 0.2),
+        inset 0 0 20px rgba(0, 191, 166, 0.1);
+    width: 115%;
+    margin-left: -7%;
+    position: relative;
+    /* Text flow properties */
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: break-word;
+    hyphens: none;
+}
+
+/* Hide only horizontal scrollbar while keeping vertical scrollbar */
+.scrollable-content {
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+/* Add subtle corner gradients */
+.corner-gradient {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(
+        circle,
+        rgba(108, 99, 255, 0.15),
+        transparent 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+}
+
+.corner-gradient.top-left {
+    top: -50px;
+    left: -50px;
+}
+
+.corner-gradient.top-right {
+    top: -50px;
+    right: -50px;
+}
+
+.corner-gradient.bottom-left {
+    bottom: -50px;
+    left: -50px;
+}
+
+.corner-gradient.bottom-right {
+    bottom: -50px;
+    right: -50px;
+}
+
+/* Ensure content is above the gradients */
+.scrollable-content p {
+    position: relative;
+    z-index: 1;
+}
+
+/* Enhanced bottom fade effect */
+.scrollable-content::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(
+        to top, 
+        rgba(31, 41, 55, 0.8) 0%,
+        rgba(31, 41, 55, 0.4) 70%,
+        transparent 100%
+    );
+    pointer-events: none;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    z-index: 2;
+}
+
+/* Custom scrollbar styling */
+.scrollable-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.scrollable-content::-webkit-scrollbar-track {
+    background: rgba(31, 41, 55, 0.3);
+    border-radius: 10px;
+}
+
+.scrollable-content::-webkit-scrollbar-thumb {
+    background: rgba(108, 99, 255, 0.5);
+    border-radius: 10px;
+}
+
+.scrollable-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(108, 99, 255, 0.7);
+}
+
+/* Text styling with consistent color */
+.main-text {
+    font-size: 1.5rem;
+    line-height: 1.9;
+}
+
+/* More specific selector for the hometown paragraph */
+.scrollable-content p.main-text.hometown-paragraph {
+    margin-top: 20px !important; /* Use pixels instead of cm for better browser support */
+    padding-top: 10px !important; /* Add internal padding as well */
+    border-top: 1px solid rgba(108, 99, 255, 0.3) !important; /* Add visible separator */
+}
+
+/* Target the third paragraph directly if class doesn't work */
+.scrollable-content p.main-text:nth-child(7) {
+    margin-top: 20px !important;
+    padding-top: 10px !important;
+    border-top: 1px solid rgba(108, 99, 255, 0.3) !important;
+}
+
+/* Alternative approach using direct margin to the paragraph */
+.scrollable-content p.main-text:nth-of-type(3) {
+    margin-top: 20px !important;
+    padding-top: 10px !important;
+    border-top: 1px solid rgba(108, 99, 255, 0.3) !important;
+}
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.95); /* Almost white */
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.main-text strong {
+    color: white; /* Pure white for emphasis */
+    font-weight: 700;
+    position: relative;
+    padding: 0 2px;
+    border-bottom: none;
+}
+
+/* Add specific spacing for the hometown paragraph */
+.hometown-paragraph {
+    margin-top: 0.5cm; /* Add 0.5cm spacing above this paragraph */
+    padding-top: 0.5cm; /* Add internal padding as well for visual separation */
+    position: relative; /* Ensure proper positioning */
+}
+
+/* Optional: add a subtle separator above the paragraph */
+.hometown-paragraph::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30%;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        rgba(108, 99, 255, 0.3),
+        transparent
+    );
+}
+        0 0 30px rgba(108, 99, 255, 0.2),
+        inset 0 0 20px rgba(0, 191, 166, 0.1);
+    width: 115%;
+    margin-left: -7%;
+    word-wrap: normal;
+    white-space: normal;
+    overflow-wrap: break-word;
+    hyphens: none;
+}
+
+/* Custom scrollbar for webkit browsers */
+.scrollable-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.scrollable-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.scrollable-content::-webkit-scrollbar-thumb {
+    background: var(--secondary-green);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Text styling - fix line breaks */
+.main-text {
+    font-size: 1.5rem;
+    line-height: 1.9;
+    margin-bottom: 2rem;
+    color: white;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    padding-left: 0;
+    word-break: normal;
+    white-space: normal;
+    overflow-wrap: break-word;
+    hyphens: none;
+}
+
+.main-text:last-child {
+    margin-bottom: 0;
+}
+
+.main-text strong {
+    color: white; /* Same white color */
+    font-weight: 700; /* Bolder */
+    position: relative;
+    padding: 0 2px;
+    border-bottom: none; /* Remove underline */
+    display: inline; /* Ensure inline display */
+    white-space: normal; /* Allow normal wrapping */
+}
+
+/* Remove the line number effect */
+.scrollable-content {
+    counter-reset: none; /* Remove counter */
+}
+
+.main-text::before {
+    content: none; /* Remove line numbers */
+}
+
+/* Add a cool line effect to the scrollable area */
+.scrollable-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(90deg, transparent 0%, rgba(108, 99, 255, 0.1) 50%, transparent 100%),
+        linear-gradient(0deg, transparent 0%, rgba(0, 191, 166, 0.1) 50%, transparent 100%);
+    background-size: 200% 200%;
+    animation: gradientMove 15s linear infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Remove the keywords container */
+.keywords-container {
+    display: none;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
+}
+
+/* Add a cool glow effect to the scrollable area */
+.scrollable-content::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to top, 
+        rgba(31, 41, 55, 0.9) 0%,
+        transparent 100%
+    );
+    pointer-events: none;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+
+/* Adjust the about content layout for wider text area */
+.about-content {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr; /* Even more space for text */
+    gap: 2rem;
+    align-items: start;
+}
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(5%, 5%) scale(1.1); }
+    100% { transform: translate(-5%, -5%) scale(0.9); }
+}
+
+@keyframes floatParticle {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.2; }
+    90% { opacity: 0.2; }
+    100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+}
+
+/* Ensure hero content stands out */
+.hero-content {
+    position: relative;
+    z-index: 5;
+}
+/* Center the About Me section title */
+.about-section .section-header {
+    text-align: center;
+}
+
+.about-section .section-title {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.about-section .section-underline {
+    margin-left: auto;
+    margin-right: auto;
+}
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(5%, 5%) scale(1.1); }
+    100% { transform: translate(-5%, -5%) scale(0.9); }
+}
+
+@keyframes floatParticle {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.2; }
+    90% { opacity: 0.2; }
+    100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+}
+
+/* Ensure hero content stands out */
+.hero-content {
+    position: relative;
+    z-index: 5;
+}
+
+
+/* Animation keyframes */
+@keyframes floatOrb {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(5%, 5%) scale(1.1); }
+    100% { transform: translate(-5%, -5%) scale(0.9); }
+}
+
+@keyframes floatParticle {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.2; }
+    90% { opacity: 0.2; }
+    100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+}
+
+/* Ensure hero content stands out */
+.hero-content {
+    position: relative;
+    z-index: 5;
+}
+
+
+.welcome-text {
+    color: var(--primary-indigo);
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    position: relative;
+    display: inline-block;
+}
+
+.welcome-text::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--primary-indigo), var(--secondary-green), var(--accent-gold));
+    background-size: 200% 100%;
+    animation: gradientMove 3s linear infinite;
+}
+
+.hero-description {
+    color: #4a4a4a;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-top: 1.5rem;
+}
+
+.hero-description {
+    color: #4a4a4a;
+    font-size: 1.1rem;
+}
+
+/* Touch-friendly enhancements */
+@media (max-width: 992px) {
+    /* Larger touch targets */
+    .project-card {
+        cursor: pointer;
+    }
+    
+    .project-card.touch-active {
+        transform: translateY(-5px);
+    }
+    
+    /* Improve scrolling experience */
+    .scrollable-content {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Prevent text selection during touch interactions */
+    .nav-link, .project-card, .social-icon {
+        user-select: none;
+        -webkit-user-select: none;
+    }
+    
+    /* Ensure buttons have proper hover states on touch */
+    .social-icon:active,
+    .project-card:active,
+    .nav-link:active {
+        opacity: 0.8;
+    }
+    
+    /* Fix for iOS Safari 100vh issue */
+    .hero {
+        height: calc(100vh - var(--nav-height));
+        height: calc((var(--vh, 1vh) * 100) - var(--nav-height));
+    }
+}
+    line-height: 1.7;
+    margin-top: 1.5rem;
+}
+
+/* Highlight text for light background */
+.highlight-text {
+    position: relative;
+    display: inline-block;
+    font-weight: 600;
+    padding: 0 4px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.highlight-text::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    opacity: 0.15;
+    z-index: -1;
+    transition: all 0.3s ease;
+}
+
+.highlight-text:hover::before {
+    opacity: 0.25;
+    transform: scale(1.05);
+}
+
+.highlight-text.indigo {
+    color: var(--primary-indigo);
+}
+
+.highlight-text.indigo::before {
+    background-color: var(--primary-indigo);
+}
+
+.highlight-text.green {
+    color: var(--secondary-green);
+}
+
+.highlight-text.green::before {
+    background-color: var(--secondary-green);
+}
+
+.highlight-text.gold {
+    color: var(--accent-gold);
+}
+
+.highlight-text.gold::before {
+    background-color: var(--accent-gold);
+}
+
+/* Direct targeting of the "relentless passion" text */
+.highlight-text.gold, 
+.highlight-text.passion-text,
+span:contains("relentless passion") {
+    color: #5D7CE4 !important; /* Soft blue that complements the background */
+}
+
+.highlight-text.gold::before, 
+.highlight-text.passion-text::before,
+span:contains("relentless passion")::before {
+    background-color: rgba(93, 124, 228, 0.2) !important; /* Matching background */
+}
+
+/* Alternative approach with inline style */
+/* Add this to your HTML where "relentless passion" appears:
+   style="color: #5D7CE4 !important; background-color: rgba(93, 124, 228, 0.2) !important;" */
+
+/* Animation keyframes */
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Remove the rotating circular background */
+.logo-circle::after {
+    content: none; /* Remove the element entirely */
+}
+
+/* Remove the rotateBorder animation */
+@keyframes rotateBorder {
+    /* Animation removed as it's no longer needed */
+}
+
+/* Simplify the logo-circle styling */
+.logo-circle {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(108, 99, 255, 0.2);
+}
+
+/* Remove the logo glow element completely */
+.logo-glow {
+    display: none;
+}
+
+/* Remove the hero background orbs completely */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(rgba(108, 99, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    z-index: 0;
+    /* Simplified to just the dot pattern */
+}
+
+.hero::after {
+    content: none; /* Remove the element entirely */
+}
+
+/* Remove any floating orbs or particles */
+.hero-particles {
+    display: none;
+}
+
+.particle {
+    display: none;
+}
+
+/* Remove any circuit board rotation and floating */
+.hero-shape.circuit-board {
+    animation: none; /* Remove all animations */
+}
+
+/* Remove any other rotating or floating elements */
+.floating-elements {
+    animation: none;
+}
+
+
+
+/* Remove the subtleGlow animation if not used elsewhere */
+@keyframes subtleGlow {
+    /* Animation kept in case it's used elsewhere, but simplified */
+    0%, 100% {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    }
+}
+
+/* Remove any other rotating elements in the hero section */
+.hero-shape.circuit-board {
+    /* Remove the rotation animation */
+    animation: float 25s ease-in-out infinite 3s;
+    /* Removed the rotate part from animation */
+}
+
+
+/* Make hero shapes more visible */
+.hero-shape {
+    opacity: 0.3;
+    z-index: 2;
+}
+
+/* Enhance geometric elements visibility */
+.geometric-elements div {
+    opacity: 0.5;
+    z-index: 3;
+}
+    border: 2px solid rgba(108, 99, 255, 0.5); /* Darker border */
+}
+
+.geo-square {
+    border: 2px solid rgba(0, 191, 166, 0.5); /* Darker border */
+}
+
+.geo-dots {
+    background: radial-gradient(circle, rgba(255, 180, 0, 0.5) 2px, transparent 2px) 0 0 / 15px 15px; /* Darker dots */
+}
+
+.geo-line {
+    background: linear-gradient(90deg, transparent, rgba(108, 99, 255, 0.5), transparent); /* Darker line */
+}
+
+/* Ensure text is readable against new background */
+.gradient-text {
+    text-shadow: 0 2px 10px rgba(108, 99, 255, 0.2); /* Add subtle shadow */
+}
+
+.animated-text {
+    color: #2D2D2D; /* Ensure dark text */
+}
+
+.subtitle {
+    color: #4a4a4a; /* Slightly lighter than main text */
+}
+
+
+.section-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(
+        135deg,
+        var(--primary-indigo) 0%,
+        var(--secondary-green) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+    position: relative;
+    text-shadow: 0 2px 10px rgba(108, 99, 255, 0.2);
+}
+
+.section-underline {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(
+        90deg,
+        var(--primary-indigo),
+        var(--secondary-green)
+    );
+    margin: 0 auto;
+    border-radius: 2px;
+}
+
+/* Highlight text styling */
+.highlight-text {
+    position: relative;
+    display: inline-block;
+    font-weight: 600;
+    padding: 0 4px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.highlight-text::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    opacity: 0.15;
+    z-index: -1;
+    transition: all 0.3s ease;
+}
+
+.highlight-text:hover::before {
+    opacity: 0.25;
+    transform: scale(1.05);
+}
+
+.highlight-text.indigo {
+    color: var(--primary-indigo);
+}
+
+.highlight-text.indigo::before {
+    background-color: var(--primary-indigo);
+}
+
+.highlight-text.green {
+    color: var(--secondary-green);
+}
+
+.highlight-text.green::before {
+    background-color: var(--secondary-green);
+}
+
+.highlight-text.gold {
+    color: var(--accent-gold);
+}
+
+.highlight-text.gold::before {
+    background-color: var(--accent-gold);
+}
+
+/* Direct targeting of the "relentless passion" text */
+.highlight-text.gold, 
+.highlight-text.passion-text,
+span:contains("relentless passion") {
+    color: #5D7CE4 !important; /* Soft blue that complements the background */
+}
+
+.highlight-text.gold::before, 
+.highlight-text.passion-text::before,
+span:contains("relentless passion")::before {
+    background-color: rgba(93, 124, 228, 0.2) !important; /* Matching background */
+}
+
+/* Alternative approach with inline style */
+/* Add this to your HTML where "relentless passion" appears:
+   style="color: #5D7CE4 !important; background-color: rgba(93, 124, 228, 0.2) !important;" */
+
+/* Animation keyframes */
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Remove the rotating circular background */
+.logo-circle::after {
+    content: none; /* Remove the element entirely */
+}
+
+/* Remove the rotateBorder animation */
+@keyframes rotateBorder {
+    /* Animation removed as it's no longer needed */
+}
+
+/* Simplify the logo-circle styling */
+.logo-circle {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(108, 99, 255, 0.2);
+}
+
+/* Remove the logo glow element completely */
+.logo-glow {
+    display: none;
+}
+
+/* Remove the hero background orbs completely */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(rgba(108, 99, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    z-index: 0;
+    /* Simplified to just the dot pattern */
+}
+
+.hero::after {
+    content: none; /* Remove the element entirely */
+}
+
+/* Remove any floating orbs or particles */
+.hero-particles {
+    display: none;
+}
+
+.particle {
+    display: none;
+}
+
+/* Remove any circuit board rotation and floating */
+.hero-shape.circuit-board {
+    animation: none; /* Remove all animations */
+}
+
+/* Remove any other rotating or floating elements */
+.floating-elements {
+    animation: none;
+}
+
+
+
+/* Remove the subtleGlow animation if not used elsewhere */
+@keyframes subtleGlow {
+    /* Animation kept in case it's used elsewhere, but simplified */
+    0%, 100% {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    }
+}
+
+/* Remove any other rotating elements in the hero section */
+.hero-shape.circuit-board {
+    /* Remove the rotation animation */
+    animation: float 25s ease-in-out infinite 3s;
+    /* Removed the rotate part from animation */
+}
+
+
+/* Make hero shapes more visible */
+.hero-shape {
+    opacity: 0.3;
+    z-index: 2;
+}
+
+/* Enhance geometric elements visibility */
+.geometric-elements div {
+    opacity: 0.5;
+    z-index: 3;
+}
+    border: 2px solid rgba(108, 99, 255, 0.5); /* Darker border */
+}
+
+.geo-square {
+    border: 2px solid rgba(0, 191, 166, 0.5); /* Darker border */
+}
+
+.geo-dots {
+    background: radial-gradient(circle, rgba(255, 180, 0, 0.5) 2px, transparent 2px) 0 0 / 15px 15px; /* Darker dots */
+}
+
+.geo-line {
+    background: linear-gradient(90deg, transparent, rgba(108, 99, 255, 0.5), transparent); /* Darker line */
+}
+
+/* Ensure text is readable against new background */
+.gradient-text {
+    text-shadow: 0 2px 10px rgba(108, 99, 255, 0.2); /* Add subtle shadow */
+}
+
+.animated-text {
+    color: #2D2D2D; /* Ensure dark text */
+}
+
+.subtitle {
+    color: #4a4a4a; /* Slightly lighter than main text */
+}
+
+
+.section-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(
+        135deg,
+        var(--primary-indigo) 0%,
+        var(--secondary-green) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+    position: relative;
+    text-shadow: 0 2px 10px rgba(108, 99, 255, 0.2);
+}
+
+.section-underline {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(
+        90deg,
+        var(--primary-indigo),
+        var(--secondary-green)
+    );
+    margin: 0 auto;
+    border-radius: 2px;
+}
+
+/* Highlight text styling */
+.highlight-text {
+    position: relative;
+    display: inline-block;
+    font-weight: 600;
+    padding: 0 4px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.highlight-text::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    opacity: 0.15;
+    z-index: -1;
+    transition: all 0.3s ease;
+}
+
+.highlight-text:hover::before {
+    opacity: 0.25;
+    transform: scale(1.05);
+}
+
+.highlight-text.indigo {
+    color: var(--primary-indigo);
+}
+
+.highlight-text.indigo::before {
+    background-color: var(--primary-indigo);
+}
+
+.highlight-text.green {
+    color: var(--secondary-green);
+}
+
+.highlight-text.green::before {
+    background-color: var(--secondary-green);
+}
+
+.highlight-text.gold {
+    color: var(--accent-gold);
+}
+
+.highlight-text.gold::before {
+    background-color: var(--accent-gold);
+}
+
+/* Direct targeting of the "relentless passion" text */
+.highlight-text.gold, 
+.highlight-text.passion-text,
+span:contains("relentless passion") {
+    color: #5D7CE4 !important; /* Soft blue that complements the background */
+}
+
+.highlight-text.gold::
+    /* Simplified to just the dot pattern */
+}
+
+.hero::after {
+    content: none; /* Remove the element entirely */
+}
+
+/* Remove any floating orbs or particles */
+.hero-particles {
+    display: none;
+}
+
+.particle {
+    display: none;
+}
+
+/* Remove any circuit board rotation and floating */
+.hero-shape.circuit-board {
+    animation: none; /* Remove all animations */
+}
+
+/* Remove any other rotating or floating elements */
+.floating-elements {
+    animation: none;
+}
+
+
+
+/* Remove the subtleGlow animation if not used elsewhere */
+@keyframes subtleGlow {
+    /* Animation kept in case it's used elsewhere, but simplified */
+    0%, 100% {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    }
+}
+
+/* Remove any other rotating elements in the hero section */
+.hero-shape.circuit-board {
+    /* Remove the rotation animation */
+    animation: float 25s ease-in-out infinite 3s;
+    /* Removed the rotate part from animation */
+}
+
+
+/* Make hero shapes more visible */
+.hero-shape {
+    opacity: 0.3;
+    z-index: 2;
+}
+
+/* Enhance geometric elements visibility */
+.geometric-elements div {
+    opacity: 0.5;
+    z-index: 3;
+}
+    border: 2px solid rgba(108, 99, 255, 0.5); /* Darker border */
+}
+
+.geo-square {
+    border: 2px solid rgba(0, 191, 166, 0.5); /* Darker border */
+}
+
+.geo-dots {
+    background: radial-gradient(circle, rgba(255, 180, 0, 0.5) 2px, transparent 2px) 0 0 / 15px 15px; /* Darker dots */
+}
+
+.geo-line {
+    background: linear-gradient(90deg, transparent, rgba(108, 99, 255, 0.5), transparent); /* Darker line */
+}
+
+/* Ensure text is readable against new background */
+.gradient-text {
+    text-shadow: 0 2px 10px rgba(108, 99, 255, 0.2); /* Add subtle shadow */
+}
+
+.animated-text {
+    color: #2D2D2D; /* Ensure dark text */
+}
+
+.subtitle {
+    color: #4a4a4a; /* Slightly lighter than main text */
+}
+
+
+.section-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(rgba(108, 99, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    z-index: 0;
+    /* Simplified to just the dot pattern */
+}
+
+.hero::after {
+    content: none; /* Remove the element entirely */
+}
+
+/* Remove any floating orbs or particles */
+.hero-particles {
+    display: none;
+}
+
+.particle {
+    display: none;
+}
+
+/* Remove any circuit board rotation and floating */
+.hero-shape.circuit-board {
+    animation: none; /* Remove all animations */
+}
+
+/* Remove any other rotating or floating elements */
+.floating-elements {
+    animation: none;
+}
+
+
+
+/* Remove the subtleGlow animation if not used elsewhere */
+@keyframes subtleGlow {
+    /* Animation kept in case it's used elsewhere, but simplified */
+    0%, 100% {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    }
+}
+
+/* Remove any other rotating elements in the hero section */
+.hero-shape.circuit-board {
+    /* Remove the rotation animation */
+    animation: float 25s ease
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(108, 99, 255, 0.2);
+}
+
+/* Remove the logo glow element completely */
+.logo-glow {
+    display: none;
+}
+
+/* Remove the hero background orbs completely */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(rgba(108, 99, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    z-index: 0;
+    /* Simplified to just the dot pattern */
+}
+
+.hero::after {
+    content: none; /* Remove the element entirely */
+}
+
+/* Remove any floating orbs or particles */
+.hero-particles {
+    display: none;
+}
+
+.particle {
+    display: none;
+}
+
+/* Remove any circuit board rotation and floating */
+.hero-shape.circuit-board {
+    animation: none; /* Remove all animations */
+}
+
+/* Remove any other rotating or floating elements */
+.floating-elements {
+    animation: none;
+}
+
+
+
+/* Remove the subtleGlow animation if not used elsewhere */
+@keyframes subtleGlow {
+    /* Animation kept in case it's used elsewhere, but simplified */
+    0%, 100% {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    }
+}
+
+/* Remove any other rotating elements in the hero section */
+.hero-shape.circuit-board {
+    /* Remove the rotation animation */
+    animation: float 25s ease-in-out infinite 3s;
+    /* Removed the rotate part from animation */
+}
+
+
+/* Make hero shapes more visible */
+.hero-shape {
+    opacity: 0.3;
+    z-index: 2;
+}
+
+/* Enhance geometric elements visibility */
+.geometric-elements div {
+    opacity: 0.5;
+    z-index: 3;
+}
+
+
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes armMove {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-30deg); }
+}
+
+@keyframes gripperMove {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(45deg); }
+}
+
+/* Add subtle pattern overlay */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%236c63ff' fill-opacity='0.05'%3E%3Cpath d='M0 0h20L0 20z'/%3E%3C/g%3E%3C/svg%3E");
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Enhance geometric elements visibility */
+.geometric-elements div {
+    opacity: 0.5; /* Increased from default */
+}
+
+.geo-circle {
+    border: 2px solid rgba(108, 99, 255, 0.5); /* Darker border */
+}
+
+.geo-square {
+    border: 2px solid rgba(0, 191, 166, 0.5); /* Darker border */
+}
+
+.geo-dots {
+    background: radial-gradient(circle, rgba(255, 180, 0, 0.5) 2px, transparent 2px) 0 0 / 15px 15px; /* Darker dots */
+}
+
+.geo-line {
+    background: linear-gradient(90deg, transparent, rgba(108, 99, 255, 0.5), transparent); /* Darker line */
+}
+
+/* Ensure text is readable against new background */
+.gradient-text {
+    text-shadow: 0 2px 10px rgba(108, 99, 255, 0.2); /* Add subtle shadow */
+}
+
+.animated-text {
+    color: #2D2D2D; /* Ensure dark text */
+}
+
+.subtitle {
+    color: #4a4a4a; /* Slightly lighter than main text */
+}
+
+
+.section-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(
+        135deg,
+        var(--primary-indigo) 0%,
+        var(--secondary-green) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+    position: relative;
+    text-shadow: 0 2px 10px rgba(108, 99, 255, 0.2);
+}
+
+.section-underline {
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(
+        90deg,
+        var(--primary-indigo),
+        var(--secondary-green)
+    );
+    margin: 0 auto;
+    border-radius: 2px;
+}
+
+/* Highlight text styling */
+.highlight-text {
+    position: relative;
+    display: inline-block;
+    font-weight: 600;
+    padding: 0 4px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.highlight-text::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    opacity: 0.15;
+    z-index: -1;
+    transition: all 0.3s ease;
+}
+
+.highlight-text:hover::before {
+    opacity: 0.25;
+    transform: scale(1.05);
+}
+
+.highlight-text.indigo {
+    color: var(--primary-indigo);
+}
+
+.highlight-text.indigo::before {
+    background-color: var(--primary-indigo);
+}
+
+.highlight-text.green {
+    color: var(--secondary-green);
+}
+
+.highlight-text.green::before {
+    background-color: var(--secondary-green);
+}
+
+.highlight-text.gold {
+    color: var(--accent-gold);
+}
+
+.highlight-text.gold::before {
+    background-color: var(--accent-gold);
+}
+
+/* Direct targeting of the "relentless passion" text */
+.highlight-text.gold, 
+.highlight-text.passion-text,
+span:contains("relentless passion") {
+    color: #5D7CE4 !important; /* Soft blue that complements the background */
+}
+
+.highlight-text.gold::before, 
+.highlight-text.passion-text::before,
+span:contains("relentless passion")::before {
+    background-color: rgba(93, 124, 228, 0.2) !important; /* Matching background */
+}
+
+/* Alternative approach with inline style */
+/* Add this to your HTML where "relentless passion" appears:
+   style="color: #5D7CE4 !important; background-color: rgba(93, 124, 228, 0.2) !important;" */
+
+/* Animation keyframes */
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Remove the rotating circular background */
+.logo-circle::after {
+    content: none; /* Remove the element entirely */
+}
+
+/* Remove the rotateBorder animation */
+@keyframes rotateBorder {
+    /* Animation removed as it's no longer needed */
+}
+
+/* Simplify the logo-circle styling */
+.logo-circle {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(108, 99, 255, 0.2);
+}
+
+/* Remove the logo glow element completely */
+.logo-glow {
+    display: none;
+}
+
+/* Remove the hero background orbs completely */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(rgba(108, 99, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    z-index: 0;
+    /* Simplified to just the dot pattern */
+}
+
+.hero::after {
+    content: none; /* Remove the element entirely */
+}
+
+/* Remove any floating orbs or particles */
+.hero-particles {
+    display: none;
+}
+
+.particle {
+    display: none;
+}
+
+/* Remove any circuit board rotation and floating */
+.hero-shape.circuit-board {
+    animation: none; /* Remove all animations */
+}
+
+/* Remove any other rotating or floating elements */
+.floating-elements {
+    animation: none;
+}
+
+
+
+/* Remove the subtleGlow animation if not used elsewhere */
+@keyframes subtleGlow {
+    /* Animation kept in case it's used elsewhere, but simplified */
+    0%, 100% {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    50% {
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    }
+}
+
+/* Remove any other rotating elements in the hero section */
+.hero-shape.circuit-board {
+    /* Remove the rotation animation */
+    animation: float 25s ease-in-out infinite 3s;
+    /* Removed the rotate part from animation */
+}
+
+
+/* Make hero shapes more visible */
+.hero-shape {
+    opacity: 0.3;
+    z-index: 2;
+}
+
+/* Enhance geometric elements visibility */
+.geometric-elements div {
+    opacity: 0.5;
+    z-index: 3;
+}
+
+
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes armMove {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-30deg); }
+}
+
+@keyframes gripperMove {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(45deg); }
+}
+
+/* Add subtle pattern overlay */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%236c63ff' fill-opacity='0.05'%3E%3Cpath d='M0 0h20L0 20z'/%3E%3C/g%3E%3C/svg%3E");
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Enhance geometric elements visibility */
+.geometric-elements div {
+    opacity: 0.5; /* Increased from default */
+}
+
+.geo-circle {
+    border: 2px solid rgba(108, 99, 255, 0.5); /* Darker border */
+}
+
+.geo-square {
+    border: 2px solid rgba(0, 191, 166, 0.5); /* Darker border */
+}
+
+.geo-dots {
+    background: radial-gradient(circle, rgba(255, 180, 0, 0.5) 2px, transparent 2px) 0 0 / 15px 15px; /* Darker dots */
+}
+
+.geo-line {
+    background: linear-gradient(90deg, transparent, rgba(108, 99, 255, 0.5), transparent); /* Darker line */
+}
+
+/* Ensure text is readable against new background */
+.gradient-text {
+    text-shadow: 0 2px 10px rgba(108, 99, 255, 0.2); /* Add subtle shadow */
+}
+
+.animated-text {
+    color: #2D2D2D; /* Ensure dark text */
+}
+
+.subtitle {
+    color: #4a4a4a; /* Slightly lighter than main text */
+}
+
+
+.section-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(
+        135deg,
+        var(--primary-indigo) 0%,
+        var(--secondary-green) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+    position: relative;
+    text-shadow: 0 2
