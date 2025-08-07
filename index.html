@@ -210,6 +210,13 @@
             border-color: rgba(255, 255, 255, 0.2);
         }
 
+        /* Hide copyright notice on mobile to prevent overlap with social links */
+        @media (max-width: 768px) {
+            .copyright-notice {
+                display: none;
+            }
+        }
+
         /* Photo Carousel Styles */
         .photo-carousel {
             position: relative;
